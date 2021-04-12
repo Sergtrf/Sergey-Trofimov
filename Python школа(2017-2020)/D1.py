@@ -1,0 +1,6 @@
+a= open('input.txt','r')
+b = open('output.txt','w')
+c = a.read().split()
+print(str(len(c)), file = b)
+a.close()
+b.close()
