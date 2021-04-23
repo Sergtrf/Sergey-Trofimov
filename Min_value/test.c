@@ -4,23 +4,23 @@
 #define EPS 1e-5
 #define pi 3.141593
 
-void test(rr_func f, double a, double b, double expected_res, int expected_err_code, char *message) {
-    double res;
+void test(rr_func f, double a, double b, double expected_min, int expected_err_code, char *message) {
+    double min;
     int err_code;
-    res = uniform_mesh_crushing(f, a, b, EPS, &err_code);
+    double res = uniform_mesh_crushing(f, a, b, EPS, &min, &err_code);
 
-    if (err_code == LACK_OF_ACCURACY && expected_err_code == LACK_OF_ACCURACY && fabs(res - expected_res) >= EPS) {
+    if (err_code == LACK_OF_ACCURACY && expected_err_code == LACK_OF_ACCURACY && fabs(min - expected_min) >= EPS) {
 	printf("%s\nTest passed!\n\n", message);
         return ;
     } 
 
-    else if (err_code == expected_err_code || fabs(res - expected_res) < EPS) {
+    else if (err_code == expected_err_code || fabs(min - expected_min) < EPS) {
         printf("%s\nTest passed!\n\n", message);
         return ;
     }
 
     else {
-        printf("expected result:                       %lf\nresult by uniform mesh crushing method:%lf\n", expected_res, res);
+        printf("expected min:                          %lf\nresult by uniform mesh crushing method:%lf\n", expected_min, min);
 	printf("expected error code:%d\nerror code:         %d\n ", expected_err_code, err_code);
 	printf("%s\n******TEST FAILED!******\n\n", message);
     }

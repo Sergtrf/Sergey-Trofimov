@@ -6,8 +6,8 @@ typedef double (*rr_func)(double x);
 #define MAX_IT 1e+6
 
 /*
-Функция вычисляет минимальное значение данной функции f(x) с точностью epsilon.
+Функция вычисляет аргумент минимального значения данной функции f(x) с точностью epsilon.
 Функция возвращает OK_RES, если итоговое значение удовлетворяет всем выставленным условиям(epsilon).
 Если отрезок не корректен, то функция возвращает WRONG_SEGMENT.
 */
-double uniform_mesh_crushing(rr_func f, double a, double b, double eps, int *err_code);
+double uniform_mesh_crushing(rr_func f, double a, double b, double eps, double *f_min, int *err_code);

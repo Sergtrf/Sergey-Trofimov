@@ -29,12 +29,12 @@ static double next_segment_search(rr_func f, double eps, double a, double b, dou
     return f_min;
 }
 
-double uniform_mesh_crushing(rr_func f, double a, double b, double eps, int *err_code) {
+double uniform_mesh_crushing(rr_func f, double a, double b, double eps, double *f_min, int *err_code) {
     double f_a = (*f)(a);
     double f_b = (*f)(b);
     double x;
     double f_x;
-    double res = f_x;
+    double res;
     int amount_of_it = 0;
 
     if (a >= b){
@@ -50,7 +50,8 @@ double uniform_mesh_crushing(rr_func f, double a, double b, double eps, int *err
 	
     } while (fabs(a - b) >= eps && amount_of_it < MAX_IT); 
     
-    res = f_x;
+    res = x;
+    *f_min = f_x;
 
     if (amount_of_it >= MAX_IT) {
 	*err_code = LACK_OF_ACCURACY;
